@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#fdf2f8">
-    <title>💌 Para Maia</title>
+    <meta name="theme-color" content="#f5f0e8">
+    <title>Para Maia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
@@ -18,14 +18,11 @@
         }
 
         :root {
-            --pink-50: #fdf2f8;
-            --pink-100: #fce7f3;
-            --pink-200: #fbcfe8;
-            --pink-300: #f9a8d4;
+            --bone: #f5f0e8;
+            --cream: #faf7f2;
             --pink-400: #f472b6;
             --pink-500: #ec4899;
             --pink-600: #db2777;
-            --cream: #fffbf7;
         }
 
         html, body {
@@ -35,7 +32,7 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(180deg, var(--pink-100) 0%, var(--pink-50) 50%, var(--cream) 100%);
+            background: linear-gradient(180deg, var(--cream) 0%, var(--bone) 50%, var(--cream) 100%);
             color: #4a4a4a;
             display: flex;
             flex-direction: column;
@@ -53,7 +50,7 @@
 
         .date {
             font-size: 0.85rem;
-            color: var(--pink-400);
+            color: var(--pink-500);
             margin-bottom: 0.3rem;
             font-weight: 500;
             text-transform: capitalize;
@@ -63,7 +60,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             font-weight: 400;
-            color: var(--pink-600);
+            color: #5a4a3a;
             margin-bottom: 1.5rem;
         }
 
@@ -91,7 +88,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.08);
             border-radius: 4px;
             transform: translateY(8px);
             filter: blur(12px);
@@ -124,7 +121,7 @@
             pointer-events: none;
         }
 
-        /* Red/Pink border stripe */
+        /* Red/Blue border stripe */
         .envelope-body::after {
             content: '';
             position: absolute;
@@ -140,24 +137,24 @@
                 #3498db 10px,
                 #3498db 20px
             ) 1;
-            opacity: 0.6;
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        /* "To: Maia" label */
+        /* "Para: Maia" label - positioned lower */
         .envelope-to {
             position: absolute;
-            bottom: 35%;
+            bottom: 20%;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: #5a4a3a;
             z-index: 1;
             text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
         }
 
-        /* Envelope Flap - Triangle with realistic shadow */
+        /* Envelope Flap */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -212,9 +209,9 @@
             top: 42%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle at 30% 30%, #ff6b6b 0%, #c0392b 50%, #922b21 100%);
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 30% 30%, #d4585a 0%, #b83234 50%, #8b2426 100%);
             border-radius: 50%;
             z-index: 10;
             box-shadow: 
@@ -224,7 +221,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
@@ -237,7 +233,7 @@
             right: -3px;
             bottom: -3px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #c0392b 0%, #922b21 100%);
+            background: radial-gradient(circle at 30% 30%, #b83234 0%, #8b2426 100%);
             z-index: -1;
             clip-path: polygon(
                 50% 0%, 61% 3%, 70% 0%, 78% 7%, 90% 5%, 
@@ -247,6 +243,26 @@
                 10% 95%, 7% 82%, 0% 75%, 3% 62%, 0% 50%, 3% 38%,
                 0% 25%, 7% 18%, 10% 5%, 22% 7%, 30% 0%, 39% 3%
             );
+        }
+
+        /* Heart shape in wax seal */
+        .wax-seal::after {
+            content: '';
+            width: 20px;
+            height: 18px;
+            background: rgba(255,255,255,0.25);
+            position: relative;
+            transform: rotate(-45deg);
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+        }
+
+        .wax-seal::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            clip-path: path('M10 18 C10 18 0 12 0 6 C0 2 3 0 6 0 C8 0 10 2 10 4 C10 2 12 0 14 0 C17 0 20 2 20 6 C20 12 10 18 10 18 Z');
         }
 
         .envelope.open .wax-seal {
@@ -259,8 +275,8 @@
         }
 
         .tap-hint {
-            color: var(--pink-400);
-            font-size: 0.95rem;
+            color: #8a7a6a;
+            font-size: 0.9rem;
             font-style: italic;
             margin-top: 0.5rem;
         }
@@ -357,7 +373,7 @@
 <body>
     <div class="container">
         <p class="date" id="today-date"></p>
-        <h1>Buenos días mi amor! 💕</h1>
+        <h1>Buenos días mi amor</h1>
 
         <!-- Envelope Section -->
         <div class="envelope-section" id="envelope-section">
@@ -367,14 +383,14 @@
                     <div class="envelope-body">
                         <div class="envelope-fold-left"></div>
                         <div class="envelope-fold-right"></div>
-                        <div class="envelope-to">Para: Maia 💕</div>
+                        <div class="envelope-to">Para: Maia</div>
                     </div>
                     <div class="envelope-flap"></div>
-                    <div class="wax-seal">❤️</div>
+                    <div class="wax-seal"></div>
                 </div>
             </div>
-            <p class="tap-hint">Toca para abrir ✨</p>
-            <p class="subtext">Para que siempre sepas lo amada que sos 💕</p>
+            <p class="tap-hint">Toca para abrir</p>
+            <p class="subtext">Para que siempre sepas lo amada que sos</p>
         </div>
 
         <!-- Letter Section -->
@@ -382,15 +398,15 @@
             <div class="letter">
                 <div class="letter-content" id="letter-content">Se que hoy no es el dia mas facil para ti pero estoy demasiado proud de ti siempre. 
 
-Se que te va a ir increible y que vas a estudiar y Dios te va a dar la fuerza y la sabiduria para estos estudios hoy y en tus examenes! 
+Se que te va a ir increible y que vas a estudiar y Dios te va a dar la fuerza y la sabiduria para estos estudios hoy y en tus examenes. 
 
 Sos la mejor y te admiro todos los dias. 
 
 Aca ando por cualquier cosa que necesites. 
 
-Te amo mi princesa 👸🏻💕</div>
+Te amo mi princesa</div>
                 <div class="letter-signature">
-                    <p class="from">De: Tu Baddie, Sodapop, tu novio, Chwis 💕</p>
+                    <p class="from">De: Tu Baddie, Sodapop, tu novio, Chwis</p>
                 </div>
             </div>
         </div>
