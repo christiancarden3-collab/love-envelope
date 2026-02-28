@@ -6,10 +6,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#fdf2f8">
-    <title>💌 Para Ti, Mi Amor</title>
+    <title>💌 Para Maia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,13 +25,12 @@
             --pink-400: #f472b6;
             --pink-500: #ec4899;
             --pink-600: #db2777;
-            --rose-gold: #b76e79;
             --cream: #fffbf7;
         }
 
         html, body {
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         body {
@@ -43,106 +42,234 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
+            min-height: 100vh;
         }
 
         .container {
             text-align: center;
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
         }
 
         .date {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--pink-400);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             font-weight: 500;
+            text-transform: capitalize;
         }
 
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 400;
             color: var(--pink-600);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        /* Envelope */
+        /* REALISTIC ENVELOPE */
         .envelope-wrapper {
             perspective: 1000px;
             cursor: pointer;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .envelope {
             position: relative;
-            width: 280px;
-            height: 180px;
+            width: 300px;
+            height: 200px;
             margin: 0 auto;
             transition: transform 0.3s ease;
         }
 
         .envelope:hover {
-            transform: scale(1.02);
+            transform: scale(1.02) translateY(-3px);
         }
 
+        /* Envelope Back (shadow) */
+        .envelope-shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+            transform: translateY(8px);
+            filter: blur(12px);
+        }
+
+        /* Envelope Body - Realistic Paper Texture */
         .envelope-body {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #fff5f7 0%, #ffe4ec 100%);
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(219, 39, 119, 0.25);
-            border: 2px solid var(--pink-200);
+            background: linear-gradient(135deg, #f5e6d3 0%, #efe2d0 30%, #e8d9c5 60%, #f0e4d4 100%);
+            border-radius: 4px;
+            box-shadow: 
+                inset 0 0 30px rgba(139, 119, 101, 0.1),
+                0 2px 4px rgba(0,0,0,0.1),
+                0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
+        /* Paper texture overlay */
+        .envelope-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        /* Red/Pink border stripe */
+        .envelope-body::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 2px solid transparent;
+            border-image: repeating-linear-gradient(
+                45deg,
+                #e74c3c,
+                #e74c3c 10px,
+                #3498db 10px,
+                #3498db 20px
+            ) 1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* "To: Maia" label */
+        .envelope-to {
+            position: absolute;
+            bottom: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: #5a4a3a;
+            z-index: 1;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+        }
+
+        /* Envelope Flap - Triangle with realistic shadow */
         .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 50%;
-            background: linear-gradient(145deg, #ffe4ec 0%, #ffd6e4 100%);
-            border-radius: 8px 8px 0 0;
-            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            height: 55%;
+            background: linear-gradient(165deg, #efe2d0 0%, #e5d5c0 50%, #dfd0bc 100%);
+            clip-path: polygon(0 0, 50% 85%, 100% 0);
             transform-origin: top center;
-            transition: transform 0.6s ease;
-            z-index: 2;
-            border: 2px solid var(--pink-200);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .envelope-flap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            clip-path: polygon(0 0, 50% 85%, 100% 0);
+        }
+
+        /* Inner fold lines */
+        .envelope-fold-left,
+        .envelope-fold-right {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .envelope-fold-left {
+            left: 0;
+            background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.03) 50%);
+            clip-path: polygon(0 0, 0 100%, 100% 100%);
+        }
+
+        .envelope-fold-right {
+            right: 0;
+            background: linear-gradient(225deg, transparent 50%, rgba(0,0,0,0.03) 50%);
+            clip-path: polygon(100% 0, 0 100%, 100% 100%);
+        }
+
+        /* Wax Seal */
+        .wax-seal {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b 0%, #c0392b 50%, #922b21 100%);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 
+                0 3px 6px rgba(0,0,0,0.3),
+                inset 0 -3px 6px rgba(0,0,0,0.2),
+                inset 0 3px 6px rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Seal edge texture */
+        .wax-seal::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #c0392b 0%, #922b21 100%);
+            z-index: -1;
+            clip-path: polygon(
+                50% 0%, 61% 3%, 70% 0%, 78% 7%, 90% 5%, 
+                93% 18%, 100% 25%, 97% 38%, 100% 50%, 97% 62%,
+                100% 75%, 93% 82%, 90% 95%, 78% 93%, 70% 100%,
+                61% 97%, 50% 100%, 39% 97%, 30% 100%, 22% 93%,
+                10% 95%, 7% 82%, 0% 75%, 3% 62%, 0% 50%, 3% 38%,
+                0% 25%, 7% 18%, 10% 5%, 22% 7%, 30% 0%, 39% 3%
+            );
+        }
+
+        .envelope.open .wax-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
         }
 
         .envelope.open .envelope-flap {
             transform: rotateX(180deg);
         }
 
-        .heart-seal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            z-index: 3;
-            animation: pulse 2s ease-in-out infinite;
-            transition: opacity 0.3s ease;
-        }
-
-        .envelope.open .heart-seal {
-            opacity: 0;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.15); }
-        }
-
         .tap-hint {
             color: var(--pink-400);
-            font-size: 0.9rem;
-            animation: bounce 2s ease-in-out infinite;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-top: 0.5rem;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .subtext {
+            color: var(--pink-500);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            font-style: italic;
         }
 
         /* Letter */
@@ -167,49 +294,58 @@
         }
 
         .letter {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 40px rgba(219, 39, 119, 0.15);
-            border: 1px solid var(--pink-100);
+            background: linear-gradient(180deg, #fffef9 0%, #fdfbf5 100%);
+            border-radius: 4px;
+            padding: 2rem 1.8rem;
+            box-shadow: 
+                0 2px 4px rgba(0,0,0,0.05),
+                0 10px 40px rgba(139, 119, 101, 0.15);
+            border: 1px solid #e8dcc8;
             text-align: left;
-            max-height: 50vh;
+            max-height: 55vh;
             overflow-y: auto;
+            position: relative;
+        }
+
+        /* Paper lines */
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 27px,
+                #e8e0d5 28px
+            );
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         .letter-content {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #555;
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: #4a4a4a;
             white-space: pre-wrap;
+            position: relative;
+            z-index: 1;
         }
 
         .letter-signature {
             margin-top: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--pink-100);
             text-align: right;
+            position: relative;
+            z-index: 1;
         }
 
         .letter-signature .from {
-            font-size: 0.85rem;
-            color: var(--pink-400);
-        }
-
-        .letter-signature .name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--pink-600);
-            margin-top: 0.3rem;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 1rem;
-            font-size: 0.75rem;
-            color: var(--pink-300);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: #5a4a3a;
         }
 
         /* Hide envelope when letter shows */
@@ -221,41 +357,44 @@
 <body>
     <div class="container">
         <p class="date" id="today-date"></p>
-        <h1>Buenos Días, Mi Amor 💕</h1>
+        <h1>Buenos días mi amor! 💕</h1>
 
         <!-- Envelope Section -->
         <div class="envelope-section" id="envelope-section">
             <div class="envelope-wrapper" onclick="openEnvelope()">
                 <div class="envelope" id="envelope">
-                    <div class="envelope-body"></div>
+                    <div class="envelope-shadow"></div>
+                    <div class="envelope-body">
+                        <div class="envelope-fold-left"></div>
+                        <div class="envelope-fold-right"></div>
+                        <div class="envelope-to">Para: Maia 💕</div>
+                    </div>
                     <div class="envelope-flap"></div>
-                    <div class="heart-seal">💌</div>
+                    <div class="wax-seal">❤️</div>
                 </div>
             </div>
             <p class="tap-hint">Toca para abrir ✨</p>
+            <p class="subtext">Para que siempre sepas lo amada que sos 💕</p>
         </div>
 
         <!-- Letter Section -->
         <div class="letter-container" id="letter-container">
             <div class="letter">
-                <div class="letter-content" id="letter-content">
-Buenos días mi amor hermosa! 🌅
+                <div class="letter-content" id="letter-content">Se que hoy no es el dia mas facil para ti pero estoy demasiado proud de ti siempre. 
 
-Espero que hayas dormido increíble y que este día te traiga muchas sonrisas.
+Se que te va a ir increible y que vas a estudiar y Dios te va a dar la fuerza y la sabiduria para estos estudios hoy y en tus examenes! 
 
-Recuerda que eres lo más importante en mi vida y que te amo con todo mi corazón. Cada día contigo es un regalo.
+Sos la mejor y te admiro todos los dias. 
 
-Que tengas un día increíble mi vida! 💕
-                </div>
+Aca ando por cualquier cosa que necesites. 
+
+Te amo mi princesa 👸🏻💕</div>
                 <div class="letter-signature">
-                    <p class="from">Con todo mi amor,</p>
-                    <p class="name">Tu Christian 💕</p>
+                    <p class="from">De: Tu Baddie, Sodapop, tu novio, Chwis 💕</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <p class="footer">Hecho con ❤️ para ti</p>
 
     <script>
         // Set today's date in Spanish
