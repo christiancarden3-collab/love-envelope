@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Security Study Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 1rem;
+            padding-bottom: 4rem;
+        }
+        
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #dbeafe;
+        }
+        
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        li::before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0.25rem;
+        }
+        
+        .star::before {
+            content: "★";
+            color: #f59e0b;
+        }
+        
+        .term {
+            display: flex;
+            flex-direction: column;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .term:last-child { border-bottom: none; }
+        
+        .term-name {
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        .term-def {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: #1e40af;
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) { background: #f8fafc; }
+        
+        .highlight {
+            background: #fef3c7;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .steps {
+            counter-reset: step;
+        }
+        
+        .steps li {
+            counter-increment: step;
+        }
+        
+        .steps li::before {
+            content: counter(step) ".";
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .compare { grid-template-columns: 1fr; }
+        }
+        
+        .nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.75rem;
+            background: #eff6ff;
+            color: #1e40af;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav a:hover { background: #dbeafe; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Information Security</h1>
+        <p class="subtitle">Study Notes - Modules 2-5</p>
+
+        <!-- MODULE 2 -->
+        <h2 id="mod2">Module 2: Organizational Readiness</h2>
+        
+        <div class="card">
+            <div class="card-title">CIA Triad</div>
+            
+            <h3>Confidentiality (Accessibility)</h3>
+            <ul>
+                <li>Ensuring info is accessible ONLY to those authorized</li>
+                <li class="star">Protection from unauthorized access and use</li>
+                <li class="star">Protecting data on systems, in transit, in process</li>
+            </ul>
+            
+            <h3>Integrity</h3>
+            <ul>
+                <li>Safeguarding accuracy and completeness of info</li>
+                <li class="star">Detection of alterations in storage, transit, process</li>
+            </ul>
+            
+            <h3>Availability</h3>
+            <ul>
+                <li>Ensuring authorized users have access when required</li>
+                <li class="star">Acceptable level of performance</li>
+                <li class="star">Fault tolerance</li>
+                <li class="star">Prevention of data loss & destruction</li>
+                <li class="star">Reliable backups, redundancy</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Before Emergency</div>
+            <p><strong>Leadership →</strong> Commitment, Support, Funding, Approval</p>
+            <br>
+            <p>Who manages? Different emergencies = different managers?</p>
+            <ul>
+                <li>Power outage?</li>
+                <li>Network disruption?</li>
+                <li>Transportation failure?</li>
+                <li>Medical quarantine?</li>
+                <li>Civil protest?</li>
+            </ul>
+            <br>
+            <p><strong>Author / Editor / Owner:</strong></p>
+            <ul>
+                <li>Who writes CP?</li>
+                <li>Who updates?</li>
+                <li>Who ensures compliance?</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Measurable Metrics</div>
+            <div class="term">
+                <span class="term-name">MTD</span>
+                <span class="term-def">Maximum Tolerable Downtime</span>
+            </div>
+            <div class="term">
+                <span class="term-name">RTO</span>
+                <span class="term-def">Recovery Time Objective</span>
+            </div>
+            <div class="term">
+                <span class="term-name">RPO</span>
+                <span class="term-def">Recovery Point Objective</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">BIA (Business Impact Analysis)</div>
+            <ul class="steps">
+                <li>Identify critical business functions</li>
+                <li>Prioritize by importance</li>
+                <li>Data Collection: right people, questionnaires, facilitated sessions, risk assessments, system logs, financial reports</li>
+            </ul>
+        </div>
+
+        <!-- KEY TERMS -->
+        <h2 id="terms">Key Terms</h2>
+        
+        <div class="card">
+            <div class="term">
+                <span class="term-name">Asset</span>
+                <span class="term-def">Organizational resource being protected (logical/physical)</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Threat</span>
+                <span class="term-def">Object, person, or entity that is a potential risk of loss to an asset</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Threat-Agent</span>
+                <span class="term-def">Specific/identifiable instance of a general threat that exploits vulnerabilities</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Vulnerability</span>
+                <span class="term-def">Flaw in system, security procedures, design that could result in breach</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Well-Known Vulnerabilities</span>
+                <span class="term-def">Examined, documented, published</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Exploit</span>
+                <span class="term-def">Using system/info illegally for personal gain; can target specific vulnerability</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Control/Safeguard/Countermeasure</span>
+                <span class="term-def">Security mechanisms, policies, procedures that counter attacks, reduce risk</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Trespass</span>
+                <span class="term-def">Electronic/human activities that breach confidentiality</span>
+            </div>
+        </div>
+
+        <!-- THREATS -->
+        <h2 id="threats">Categories of Threats</h2>
+        
+        <div class="card" style="overflow-x: auto;">
+            <table>
+                <tr><th>Category</th><th>Example</th></tr>
+                <tr><td>Compromises of IP</td><td>Piracy, copyright infringement</td></tr>
+                <tr><td>Quality of Service Deviations</td><td>ISP/WAN issues, power</td></tr>
+                <tr><td>Espionage/Trespass</td><td>Unauthorized access, data collection</td></tr>
+                <tr><td>Forces of Nature</td><td>Fire, floods, earthquakes</td></tr>
+                <tr><td>Human Error/Failure</td><td>Accidents, employee mistakes</td></tr>
+                <tr><td>Information Extortion</td><td>Blackmail</td></tr>
+                <tr><td>Sabotage/Vandalism</td><td>Destruction of systems/info</td></tr>
+                <tr><td>Software Attacks</td><td>Virus, worm, macros, DoS</td></tr>
+                <tr><td>Technical Hardware Failures</td><td>Equipment</td></tr>
+                <tr><td>Technical Software Failures</td><td>Bugs, code problems</td></tr>
+                <tr><td>Technological Obsolescence</td><td>Antiquated tech</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Software Attacks</div>
+            <div class="term">
+                <span class="term-name">Virus</span>
+                <span class="term-def">Segment of code that performs malicious action</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Worm</span>
+                <span class="term-def">Malicious program that replicates itself</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Propagation Vectors</span>
+                <span class="term-def">Way malicious code spreads (Ex: Trojan Horse via Social Engineering)</span>
+            </div>
+        </div>
+
+        <!-- CHAPTER 3 -->
+        <h2 id="ch3">Chapter 3: Contingency Strategies</h2>
+        
+        <div class="card">
+            <div class="card-title">Backup Types</div>
+            <div class="term">
+                <span class="term-name">Differential</span>
+                <span class="term-def">All files changed since last FULL backup</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Incremental</span>
+                <span class="term-def">Only files modified since last backup (shortest time, least space, often daily)</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Copy</span>
+                <span class="term-def">Backup of specified files regardless of modification</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Virtualization</div>
+            <div class="term">
+                <span class="term-name">Host Platform</span>
+                <span class="term-def">Physical server & OS that virtualization app & VMs run on</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Hypervisor</span>
+                <span class="term-def">Virtualization app/software that enables VMs on host</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Virtual Machine</span>
+                <span class="term-def">Virtualized environment running on host platform</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">BC vs DR</div>
+            <div class="term">
+                <span class="term-name">Business Continuity</span>
+                <span class="term-def">Steps for implementing critical functions using alternate mechanisms until normal ops resume</span>
+            </div>
+            <div class="term">
+                <span class="term-name">Disaster Recovery</span>
+                <span class="term-def">Efforts to resume normal operations at primary place of business</span>
+            </div>
+        </div>
+
+        <!-- CHAPTER 4 -->
+        <h2 id="ch4">Chapter 4: IR Planning</h2>
+        
+        <div class="card">
+            <div class="card-title">Flow: CMPT → IRPC</div>
+            <ul class="steps">
+                <li>CMPT passes BIA to IRPC</li>
+                <li>IRPC gives info to subcommittees:
+                    <ul>
+                        <li>Incident Response (CSIRT)</li>
+                        <li>Business Continuity</li>
+                        <li>Disaster Recovery</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">IRPC Policy Must Be:</div>
+            <ul>
+                <li>Leadership Support</li>
+                <li>Clarity</li>
+                <li>Enforceable</li>
+                <li>Required/Sufficient length</li>
+                <li>Functional</li>
+                <li>Realistic</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Incident Timeline</div>
+            
+            <h3>Before Incident — Training CSIRT:</h3>
+            <ul class="steps">
+                <li>Select tools/techniques</li>
+                <li>SANS Institute / DHS / US CERT conferences</li>
+                <li>Professional reading program</li>
+            </ul>
+            
+            <h3>During Incident</h3>
+            <ul><li>Who is in charge?</li></ul>
+            
+            <h3>After Incident — MIR (Major Incident Review):</h3>
+            <ul>
+                <li>Who is involved?</li>
+                <li>What happened?</li>
+                <li>How did it happen?</li>
+                <li>Can we prevent it?</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Plan, Then Test the Plan!</div>
+            <ul class="steps">
+                <li>Develop multiple plans</li>
+                <li>Leadership chooses best fit + feedback</li>
+                <li>Desk Check</li>
+                <li>Structured Walk-through (table reads)</li>
+                <li>Simulation (practice drills / dry runs)</li>
+                <li>Parallel Testing (rehearsals)</li>
+                <li>Full Interruption</li>
+                <li>War Gaming</li>
+                <li>Repeat on schedule</li>
+            </ul>
+        </div>
+
+        <!-- SETA -->
+        <div class="card">
+            <div class="card-title">SETA — Security Education, Awareness, Training</div>
+            <ul>
+                <li>What is expected</li>
+                <li>How to recognize an attack</li>
+                <li>How to report suspected incident</li>
+                <li>How to mitigate damage</li>
+            </ul>
+            <h3>Good Security Practices:</h3>
+            <ul>
+                <li>OS patched</li>
+                <li>Antiviruses</li>
+                <li>Operating in least privilege</li>
+                <li>Not opening suspect attachments</li>
+                <li>Avoiding social engineering</li>
+                <li>Not downloading unauthorized software</li>
+                <li>Using secure passwords</li>
+                <li>Utilizing company VPN</li>
+            </ul>
+        </div>
+
+        <!-- CHAPTER 5 -->
+        <h2 id="ch5">Chapter 5: Building CSIRT</h2>
+        
+        <div class="card">
+            <div class="card-title">Acronyms</div>
+            <ul>
+                <li><strong>CSIRT</strong> — Computer Security Incident Response Team</li>
+                <li><strong>SIRT</strong> — Security Incident Response Team</li>
+                <li><strong>CERT</strong> — Computer Emergency Response Team</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Steps to Build CSIRT</div>
+            <ul class="steps">
+                <li>Obtain management support & buy-in</li>
+                <li>Determine CSIRT strategic plan</li>
+                <li>Gather relevant information</li>
+                <li>Design the CERT vision</li>
+                <li>Communicate CSIRT vision & operational plan</li>
+                <li>Begin implementation</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">1. Obtaining Buy-in</div>
+            <p><span class="highlight">Buy-in</span> = "Acceptance of and willingness to actively support & participate"</p>
+            <br>
+            <p><strong>Budget:</strong> Project startup vs annual ops, preliminary vs additional</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">2. Strategic Plan</div>
+            <ul>
+                <li>Time frame</li>
+                <li>Gap analysis</li>
+                <li>Training methods</li>
+                <li>Testing requirements</li>
+                <li>Formal & informal communications</li>
+                <li>Updating documents</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Structure & Model</div>
+            <p><strong>Sourcing:</strong> Central / Distributed / Coordinating</p>
+            <p><strong>Staffing:</strong> Employees / Partially outsourced / Fully outsourced</p>
+            <p><strong>Team Model:</strong> 24/7 monitoring / Full-time vs part-time / Employee morale</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Typical CSIRT Skill Sets</div>
+            <ul>
+                <li>Malware: Scanning, elimination, recovery</li>
+                <li>System Administration</li>
+                <li>Network Admin: Switches, routers, recovery</li>
+                <li>Firewall Administration</li>
+                <li>Intrusion Detection Systems</li>
+                <li>Cryptography</li>
+                <li>Data Storage & Recovery (RAID)</li>
+                <li>Data Networks</li>
+                <li>Documentation: Creation & maintenance</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">4. Designing the CSIRT Vision</div>
+            <ul>
+                <li>Identify your constituency: Who/what does it support?</li>
+                <li>Define CSIRT's mission, goals, objectives</li>
+                <li>Determine organizational model</li>
+                <li>Select services it will provide</li>
+                <li>Identify required resources (staff, equipment, infrastructure)</li>
+                <li>Determine funding</li>
+            </ul>
+        </div>
+
+        <!-- COMPARISON -->
+        <h2 id="compare">Protect & Forget vs Apprehend & Prosecute</h2>
+        
+        <div class="compare">
+            <div class="card">
+                <div class="card-title">Protect & Forget</div>
+                <ul class="steps">
+                    <li>Near incident</li>
+                    <li>Terminate invasion</li>
+                    <li>How access obtained</li>
+                    <li>Restore systems</li>
+                    <li>Secure method</li>
+                    <li>Document steps</li>
+                    <li>Lessons learned</li>
+                    <li>Management eval</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-title">Apprehend & Prosecute</div>
+                <ul class="steps">
+                    <li>Near incident</li>
+                    <li>Contact law enforcement</li>
+                    <li>Document actions, time, who</li>
+                    <li>Isolate systems</li>
+                    <li>Monitor intruder</li>
+                    <li>Discover identity</li>
+                    <li>Discover access method</li>
+                    <li>Enable invasion</li>
+                    <li>Document state</li>
+                    <li>Restore systems</li>
+                    <li>Secure method</li>
+                    <li>Document Q&A</li>
+                    <li>Secure all logs</li>
+                    <li>Lessons learned</li>
+                    <li>Management eval</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center; margin-top: 2rem;">
+            <p style="font-size: 1.5rem;">📚 Good luck on the exam! 💪</p>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <a href="#mod2">Module 2</a>
+        <a href="#terms">Terms</a>
+        <a href="#threats">Threats</a>
+        <a href="#ch3">Ch 3</a>
+        <a href="#ch4">Ch 4</a>
+        <a href="#ch5">Ch 5</a>
+        <a href="#compare">Compare</a>
+    </nav>
+</body>
+</html>
