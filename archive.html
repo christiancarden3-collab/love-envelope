@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Archivo de Cartas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bone: #f5f0e8;
+            --cream: #faf7f2;
+            --pink-400: #f472b6;
+            --pink-500: #ec4899;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--bone) 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #4a4a4a;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #5a4a3a;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--pink-500);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--pink-500);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .letter-card {
+            background: linear-gradient(180deg, #fffef9 0%, #fdfbf5 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(139, 119, 101, 0.15);
+            border: 1px solid #e8dcc8;
+        }
+        
+        .letter-date {
+            font-size: 0.8rem;
+            color: var(--pink-500);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+        
+        .letter-content {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+            white-space: pre-wrap;
+        }
+        
+        .letter-signature {
+            margin-top: 1rem;
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.1rem;
+            color: #5a4a3a;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #8a7a6a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver a hoy</a>
+        <h1>Nuestras Cartas</h1>
+        <p class="subtitle">Cada palabra, guardada para siempre</p>
+        
+        <div id="archive-container"></div>
+    </div>
+
+    <script>
+        const letters = [
+            {
+                date: "2026-03-01",
+                content: `Espero que este dia sea un dia lleno de bendiciones y sonrisas! Vas a tener un dia increible, productivo y que te va a ir excelente en tu grupo y en tus estudios.
+
+Se lo dificil que ha sido esto de long distance, mas para mi que para ti, pero se que por mis defectos han afectado un poco a los dos. Ayer en la noche estuve leyendo un poco de todo, y voy a probar algo nuevo hoy y espero que esto que pruebe se quede conmigo para nosotros todos los dias.
+
+Quiero ser tu paz, no tu caos. Quiero ser tu apoyo y amor incondicional para toda la vida, y me mejorare. Como se que tu lo haces.
+
+Te amo`,
+                signature: "De: Tu Baddie, Sodapop, tu novio, tu everything, Chwis"
+            },
+            {
+                date: "2026-02-28",
+                content: `Se que hoy no es el dia mas facil para ti pero estoy demasiado proud de ti siempre. 
+
+Se que te va a ir increible y que vas a estudiar y Dios te va a dar la fuerza y la sabiduria para estos estudios hoy y en tus examenes. 
+
+Sos la mejor y te admiro todos los dias. 
+
+Aca ando por cualquier cosa que necesites. 
+
+Te amo mi princesa`,
+                signature: "De: Tu Baddie, Sodapop, tu novio, Chwis"
+            }
+        ];
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T12:00:00');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('es-ES', options);
+        }
+
+        function renderArchive() {
+            const container = document.getElementById('archive-container');
+            
+            if (letters.length === 0) {
+                container.innerHTML = '<div class="empty-state">Todavia no hay cartas guardadas</div>';
+                return;
+            }
+            
+            // Sort by date descending (newest first)
+            letters.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            letters.forEach(letter => {
+                const card = document.createElement('div');
+                card.className = 'letter-card';
+                card.innerHTML = `
+                    <div class="letter-date">${formatDate(letter.date)}</div>
+                    <div class="letter-content">${letter.content}</div>
+                    <div class="letter-signature">${letter.signature}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        renderArchive();
+    </script>
+</body>
+</html>
